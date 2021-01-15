@@ -13,10 +13,10 @@ class BreakpointProvider {
   breakpoints: Partial<Breakpoints> = {
     values: {
       xs: 0,
-      sm: 576,
-      md: 768,
-      lg: 992,
-      xl: 1920
+      sm: 0,
+      md: 576,
+      lg: 768,
+      xl: 992
     }
   }
 
@@ -26,20 +26,16 @@ class BreakpointProvider {
 
   constructor() {
     this.mediaQueries = {
-      small: `(max-width: ${this.breakpoints.values!.sm}px)`,
-      medium: `(min-width: ${this.breakpoints.values!.sm}px) and (max-width: ${
-        this.breakpoints.values!.md
-      }px)`,
-      large: `(min-width: ${this.breakpoints.values!.md}px) and (max-width: ${
-        this.breakpoints.values!.lg
-      }px)`,
-      'extra-large': `(min-width: ${this.breakpoints.values!.lg}px)`
+      small: `(max-width: ${this.breakpoints.values!.md - 1}px)`,
+      medium: `(min-width: ${this.breakpoints.values!.md}px)`,
+      large: `(min-width: ${this.breakpoints.values!.lg}px)`,
+      'extra-large': `(min-width: ${this.breakpoints.values!.xl}px)`
     }
   }
 
   disableMobileBreakpoints() {
-    this.breakpoints.values!.xs = 768
-    this.breakpoints.values!.sm = 768
+    this.breakpoints.values!.xs = this.breakpoints.values!.md
+    this.breakpoints.values!.sm = this.breakpoints.values!.md
 
     this.mediaQueries.small = ''
     this.mediaQueries.medium = ''
@@ -79,17 +75,21 @@ const screenSizeToBreakpointKey = (size: number): BreakpointKeys => {
    * @param {number} size Screen size
    */
 
-  const { sm, md, lg } = PicassoBreakpoints.breakpoints.values!
+  const { md, lg, xl } = PicassoBreakpoints.breakpoints.values!
 
-  if (size < sm) {
-    return 'small'
-  } else if (size >= sm && size < md) {
-    return 'medium'
-  } else if (size >= md && size < lg) {
+  if (size >= xl) {
+    return 'extra-large'
+  }
+
+  if (size >= lg) {
     return 'large'
   }
 
-  return 'extra-large'
+  if (size >= md) {
+    return 'medium'
+  }
+
+  return 'small'
 }
 
 export const isScreenSize = (
@@ -118,15 +118,38 @@ export const useScreenSize = () => {
   return size
 }
 
-export const useBreakpoint = (sizes: BreakpointKeys[] | BreakpointKeys) => {
-  const mediaQueryString = screens(...([] as BreakpointKeys[]).concat(sizes))
-  const mediaQuery = useMediaQuery(mediaQueryString, {
+const useCurrentSize = () => {
+  const isMedium = useMediaQuery(screens('medium'), {
     noSsr: true
   })
 
-  if (!mediaQueryString) return false
+  const isLarge = useMediaQuery(screens('large'), {
+    noSsr: true
+  })
 
-  return mediaQuery
+  const isExtraLarge = useMediaQuery(screens('extra-large'), {
+    noSsr: true
+  })
+
+  if (isExtraLarge) {
+    return 'extra-large'
+  }
+
+  if (isLarge) {
+    return 'large'
+  }
+
+  if (isMedium) {
+    return 'medium'
+  }
+
+  return 'small'
+}
+
+export const useBreakpoint = (sizes: BreakpointKeys[] | BreakpointKeys) => {
+  const currentSize = useCurrentSize()
+
+  return [].concat(sizes).includes(currentSize)
 }
 
 /**
