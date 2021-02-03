@@ -16,9 +16,8 @@ page
   .addComponentDocs(sidebarItemStory.componentDocs)
   .addComponentDocs(sidebarLogoStory.componentDocs)
 
-page
-  .createChapter()
-  .addExample('Sidebar/story/Default.example.tsx', 'Default')
-  .addExample('Sidebar/story/Variants.example.tsx', 'Variants')
+page.createChapter()
+// .addExample('Sidebar/story/Default.example.tsx', 'Default')
+// .addExample('Sidebar/story/Variants.example.tsx', 'Variants')
 
 page.connect(sidebarItemStory.chapter)
