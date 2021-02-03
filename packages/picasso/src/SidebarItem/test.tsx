@@ -78,6 +78,27 @@ describe('SidebarItem', () => {
     expect(container).toMatchSnapshot()
   })
 
+  it('apply selected styles when subMenu has a wrapper component', () => {
+    const SubMenu = () => (
+      <Sidebar.Menu>
+        <Sidebar.Item selected>Menu item</Sidebar.Item>
+      </Sidebar.Menu>
+    )
+
+    const { container } = render(
+      <TestSidebarItem
+        icon={<Candidates16 />}
+        menu={<SubMenu />}
+        collapsible
+        isExpanded
+      >
+        Test item
+      </TestSidebarItem>
+    )
+
+    expect(container).toMatchSnapshot()
+  })
+
   it('collapsible menu is expanded when one of the children is selected', () => {
     const { container } = render(
       <Sidebar>
