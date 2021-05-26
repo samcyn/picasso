@@ -29,15 +29,14 @@ const {
   TICK_HEIGHT
 } = CHART_CONSTANTS
 
-export interface Props<
-  K extends string | number | symbol,
-  V = { [key in K]?: number }
-> extends BaseChartProps {
+export interface Props<K extends string, V = Partial<{ [key in K]: number }>>
+  extends BaseChartProps {
   data: {
     name: string
     value: V
   }[]
   dataKeys: K[]
+  stackKeys?: K[][]
   labelKey?: string
   getBarColor: (
     dataKey: string,
@@ -48,7 +47,6 @@ export interface Props<
     index?: number
   ) => string
   getBarLabelColor?: (params: { dataKey: string; index?: number }) => string
-  getBarStackId?: (dataKey: string) => string | undefined
 }
 
 const StyleOverrides = () => (
@@ -79,6 +77,7 @@ export const extractValues = <K extends string>(data: Props<K>['data']) =>
   data.map(dataItem => dataItem.value)
 
 const BarChart = <K extends string>({
+  stackKeys = [],
   data,
   dataKeys,
   className,
@@ -90,7 +89,6 @@ const BarChart = <K extends string>({
   getBarColor = () => palette.blue.main,
   labelKey,
   getBarLabelColor = () => palette.grey.dark,
-  getBarStackId = () => undefined,
   ...rest
 }: Props<K>) => {
   const formattedData = formatData(data)
@@ -113,18 +111,40 @@ const BarChart = <K extends string>({
   const topDomain = findTopDomain(extractValues(data))
   const ticks = getD3Ticks(BOTTOM_DOMAIN, topDomain, NUMBER_OF_TICKS)
 
+  const shouldShowLabel = ({
+    dataKey,
+    index
+  }: {
+    dataKey: string
+    index?: number
+  }) => {
+    if (typeof index === 'undefined') {
+      return false
+    }
+
+    const value = data[index].value[dataKey as K]
+
+    return typeof value === 'number'
+  }
+
+  const getStackId = (dataKey: K) =>
+    stackKeys.find(keys => keys.includes(dataKey))?.join('-')
+
   const renderBars = () => {
     return dataKeys.map(dataKey => {
+      const stackId = getStackId(dataKey)
+
       return (
         <Bar
           key={dataKey}
           dataKey={dataKey}
-          stackId={getBarStackId(dataKey)}
+          stackId={stackId}
           fill={getBarColor(dataKey)}
           label={
             <BarChartLabel
               dataKey={dataKey}
               getBarLabelColor={getBarLabelColor}
+              shouldShow={shouldShowLabel}
             />
           }
         >
@@ -185,7 +205,8 @@ const BarChart = <K extends string>({
 BarChart.defaultProps = {
   height: 200,
   width: 'auto',
-  tooltip: false
+  tooltip: false,
+  stackKeys: []
 }
 
 export default BarChart

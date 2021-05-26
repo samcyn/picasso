@@ -7,6 +7,7 @@ const CHART_DATA = [
     name: 'Claimed',
     value: {
       'active talent': 23,
+      'potential talent': 0,
       viable: 7,
       'bad leads': 8,
       rejected: 15
@@ -14,23 +15,53 @@ const CHART_DATA = [
   },
   {
     name: 'Contacted',
-    value: { 'active talent': 5, 'potential talent': 9 }
+    value: {
+      'active talent': 5,
+      'potential talent': 9,
+      viable: 0,
+      'bad leads': 0,
+      rejected: 0
+    }
   },
   {
     name: 'Approved',
-    value: { 'active talent': 2, 'potential talent': 1 }
+    value: {
+      'active talent': 2,
+      'potential talent': 1,
+      viable: 0,
+      'bad leads': 0,
+      rejected: 0
+    }
   },
   {
     name: 'Verified',
-    value: { 'active talent': 2, 'potential talent': 2 }
+    value: {
+      'active talent': 2,
+      'potential talent': 2,
+      viable: 0,
+      'bad leads': 0,
+      rejected: 0
+    }
   },
   {
     name: 'With a Deposit',
-    value: { 'active talent': 2, 'potential talent': 3 }
+    value: {
+      'active talent': 2,
+      'potential talent': 3,
+      viable: 0,
+      'bad leads': 0,
+      rejected: 0
+    }
   },
   {
     name: 'With an Active engagement',
-    value: { 'active talent': 1, 'potential talent': 4 }
+    value: {
+      'active talent': 1,
+      'potential talent': 4,
+      viable: 0,
+      'bad leads': 0,
+      rejected: 0
+    }
   }
 ]
 
@@ -55,11 +86,7 @@ const Example = () => (
     getBarColor={dataKey => COLORS_MAPPING[dataKey]}
     getBarLabelColor={() => palette.grey.dark}
     width={720}
-    getBarStackId={dataKey =>
-      dataKey === 'viable' || dataKey === 'bad leads' || dataKey === 'rejected'
-        ? 'a'
-        : undefined
-    }
+    stackKeys={[['viable', 'bad leads', 'rejected']]}
     tooltip
   />
 )

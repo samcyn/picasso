@@ -69,7 +69,7 @@ const formatData = (data: Bar[], labels: Labels) => {
 
 const getBarColor = (
   dataKey: string,
-  entry?: { name: string; value: { team: number; user: number } }
+  entry?: { name: string; value: Partial<{ team: number; user: number }> }
 ) => {
   if (!entry) {
     return DEFAULT_COLORS[0]
@@ -79,7 +79,12 @@ const getBarColor = (
     return COLORS[entry.name]?.[0] || DEFAULT_COLORS[0]
   }
 
-  if (entry.value.team > entry.value.user && entry.name !== 'claimed') {
+  if (
+    entry.value.team &&
+    entry.value.user &&
+    entry.value.team > entry.value.user &&
+    entry.name !== 'claimed'
+  ) {
     return COLOR_FOR_BAD_RESULT
   }
 
@@ -152,6 +157,7 @@ export const CategoriesChart = ({
   return (
     <BarChart
       labelKey='label'
+      dataKeys={['team', 'user']}
       data={chartData}
       tooltip
       getBarLabelColor={getBarLabelColor}
