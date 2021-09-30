@@ -61,7 +61,7 @@ export interface Props
    * Size of component
    * @default medium
    */
-  size?: SizeType<'small' | 'medium'>
+  size?: SizeType<'small' | 'medium' | 'large'>
   /** Whether to render reset icon when there is a value in the input */
   enableReset?: boolean
   /** Callback invoked when reset button was clicked */
