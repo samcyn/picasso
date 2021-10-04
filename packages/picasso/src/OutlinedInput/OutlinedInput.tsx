@@ -1,6 +1,6 @@
 import React, {
   ChangeEventHandler,
-  ReactType,
+  ElementType,
   ReactNode,
   InputHTMLAttributes,
   MouseEvent,
@@ -38,7 +38,7 @@ export interface Props
     > {
   /** Width of the component */
   width?: 'full' | 'shrink' | 'auto'
-  inputComponent?: ReactType<InputBaseComponentProps>
+  inputComponent?: ElementType<InputBaseComponentProps>
   inputProps?: BaseInputProps
   defaultValue?: ValueType
   value?: ValueType
