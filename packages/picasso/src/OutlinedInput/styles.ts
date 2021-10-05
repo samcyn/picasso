@@ -107,7 +107,7 @@ export default ({ palette, sizes: { input } }: Theme) =>
       height: input.height
     },
     rootLarge: {
-      padding: '1rem',
+      padding: '0.25rem 0.625rem',
       height: '3rem'
     },
     rootFull: {
