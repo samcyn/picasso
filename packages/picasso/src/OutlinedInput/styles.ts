@@ -107,7 +107,7 @@ export default ({ palette, sizes: { input } }: Theme) =>
       height: input.height
     },
     rootLarge: {
-      padding: '0.25rem 0.625rem',
+      padding: '1rem',
       height: '3rem'
     },
     rootFull: {
@@ -131,6 +131,10 @@ export default ({ palette, sizes: { input } }: Theme) =>
     },
     inputMedium: {
       fontSize: '0.875rem',
+      lineHeight: '1rem'
+    },
+    inputLarge: {
+      fontSize: '1rem',
       lineHeight: '1rem'
     },
     inputMultiline: {},
