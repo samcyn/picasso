@@ -10,6 +10,7 @@ import React, {
 import cx from 'classnames'
 import { Theme, makeStyles } from '@material-ui/core/styles'
 import { BaseProps, SizeType } from '@toptal/picasso-shared'
+import capitalize from '@material-ui/core/utils/capitalize'
 
 import InputAdornment from '../InputAdornment'
 import OutlinedInput, { BaseInputProps } from '../OutlinedInput'
@@ -85,7 +86,7 @@ export interface Props
   outlineRef?: React.Ref<HTMLElement>
 }
 
-type LimitAdornmentProps = Pick<Props, 'multiline' | 'limit'> & {
+type LimitAdornmentProps = Pick<Props, 'multiline' | 'limit' | 'size'> & {
   counter: NonNullable<Props['counter']>
   charsLength: number
 }
@@ -98,7 +99,13 @@ type StartAdornmentProps = Pick<Props, 'icon' | 'iconPosition' | 'disabled'>
 
 type EndAdornmentProps = Pick<
   Props,
-  'icon' | 'iconPosition' | 'disabled' | 'multiline' | 'limit' | 'counter'
+  | 'icon'
+  | 'iconPosition'
+  | 'disabled'
+  | 'multiline'
+  | 'limit'
+  | 'counter'
+  | 'size'
 > & { charsLength?: number }
 
 const useStyles = makeStyles<Theme>(styles, { name: 'PicassoInput' })
@@ -144,7 +151,7 @@ const getMultilineLabel = ({
 
 const LimitAdornment = (props: LimitAdornmentProps) => {
   const classes = useStyles()
-  const { multiline, charsLength, counter, limit } = props
+  const { multiline, charsLength, counter, limit, size = 'medium' } = props
 
   const charsTillLimit = getCharsTillLimit({
     counter,
@@ -168,9 +175,11 @@ const LimitAdornment = (props: LimitAdornmentProps) => {
       disablePointerEvents
     >
       <span
-        className={cx(classes.limiterLabel, {
-          [classes.limiterLabelError]: charsTillLimit <= 0
-        })}
+        className={cx(
+          classes.limiterLabel,
+          { [classes.limiterLabelError]: charsTillLimit <= 0 },
+          classes[`limiter${capitalize(size)}`]
+        )}
       >
         {multiline ? Math.abs(charsTillLimit) : charsTillLimit} {multilineLabel}
       </span>
@@ -218,7 +227,8 @@ const EndAdornment = (props: EndAdornmentProps) => {
     limit,
     multiline,
     charsLength,
-    counter
+    counter,
+    size
   } = props
 
   if (icon && iconPosition === 'end') {
@@ -233,6 +243,7 @@ const EndAdornment = (props: EndAdornmentProps) => {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         counter={counter!}
         limit={limit}
+        size={size}
       />
     )
   }
@@ -354,6 +365,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(function Input(
             charsLength={charsLength}
             multiline={multiline}
             counter={counter}
+            size={size}
           />
         )
       }

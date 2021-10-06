@@ -27,7 +27,6 @@ export default ({ palette }: Theme) =>
     },
     limiterLabel: {
       color: palette.grey.main2,
-      fontSize: '0.75rem',
       lineHeight: '1rem'
     },
     limiterLabelError: {
@@ -42,5 +41,11 @@ export default ({ palette }: Theme) =>
       margin: 0,
       padding: '0.25rem 0',
       borderTop: `1px solid ${palette.grey.lighter2}`
+    },
+    limiterMedium: {
+      fontSize: '0.625rem'
+    },
+    limiterLarge: {
+      fontSize: '0.75rem'
     }
   })
