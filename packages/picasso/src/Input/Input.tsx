@@ -91,11 +91,14 @@ type LimitAdornmentProps = Pick<Props, 'multiline' | 'limit' | 'size'> & {
   charsLength: number
 }
 
-type IconAdornmentProps = Pick<Props, 'disabled' | 'icon'> & {
+type IconAdornmentProps = Pick<Props, 'disabled' | 'icon' | 'size'> & {
   position: Props['iconPosition']
 }
 
-type StartAdornmentProps = Pick<Props, 'icon' | 'iconPosition' | 'disabled'>
+type StartAdornmentProps = Pick<
+  Props,
+  'icon' | 'iconPosition' | 'disabled' | 'size'
+>
 
 type EndAdornmentProps = Pick<
   Props,
@@ -188,10 +191,10 @@ const LimitAdornment = (props: LimitAdornmentProps) => {
 }
 
 const IconAdornment = (props: IconAdornmentProps) => {
-  const { position, disabled, icon } = props
+  const { position, disabled, icon, size = 'medium' } = props
   const classes = useStyles()
   const styledIcon = React.cloneElement(icon as ReactElement, {
-    className: classes.icon,
+    className: cx(classes.icon, classes[`icon${capitalize(size)}`]),
     role: 'presentation'
   })
 
@@ -207,16 +210,21 @@ const IconAdornment = (props: IconAdornmentProps) => {
   )
 }
 
-const StartAdornment = ({
-  icon,
-  iconPosition,
-  disabled
-}: StartAdornmentProps) => {
+const StartAdornment = (props: StartAdornmentProps) => {
+  const { icon, iconPosition, disabled, size } = props
+
   if (!icon || iconPosition !== 'start') {
     return null
   }
 
-  return <IconAdornment disabled={disabled} position='start' icon={icon} />
+  return (
+    <IconAdornment
+      disabled={disabled}
+      position='start'
+      icon={icon}
+      size={size}
+    />
+  )
 }
 
 const EndAdornment = (props: EndAdornmentProps) => {
@@ -352,6 +360,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(function Input(
             icon={icon}
             iconPosition={iconPosition}
             disabled={disabled}
+            size={size}
           />
         )
       }

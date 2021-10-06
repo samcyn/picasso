@@ -25,6 +25,14 @@ export default ({ palette }: Theme) =>
     icon: {
       flex: '1 1 0%' // fix for IE11
     },
+    iconMedium: {
+      width: '1rem',
+      height: '1rem'
+    },
+    iconLarge: {
+      width: '1.5rem',
+      height: '1.5rem'
+    },
     limiterLabel: {
       color: palette.grey.main2,
       lineHeight: '1rem'
