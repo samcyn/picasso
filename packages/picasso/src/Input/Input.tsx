@@ -10,7 +10,6 @@ import React, {
 import cx from 'classnames'
 import { Theme, makeStyles } from '@material-ui/core/styles'
 import { BaseProps, SizeType } from '@toptal/picasso-shared'
-import capitalize from '@material-ui/core/utils/capitalize'
 
 import InputAdornment from '../InputAdornment'
 import OutlinedInput, { BaseInputProps } from '../OutlinedInput'
@@ -154,7 +153,7 @@ const getMultilineLabel = ({
 
 const LimitAdornment = (props: LimitAdornmentProps) => {
   const classes = useStyles()
-  const { multiline, charsLength, counter, limit, size = 'medium' } = props
+  const { multiline, charsLength, counter, limit, size } = props
 
   const charsTillLimit = getCharsTillLimit({
     counter,
@@ -172,17 +171,14 @@ const LimitAdornment = (props: LimitAdornmentProps) => {
     <InputAdornment
       data-testid='limit-adornment-multiline-label'
       position='end'
-      className={cx({
-        [classes.limiterMultiline]: multiline
-      })}
+      className={cx({ [classes.limiterMultiline]: multiline })}
+      size={size}
       disablePointerEvents
     >
       <span
-        className={cx(
-          classes.limiterLabel,
-          { [classes.limiterLabelError]: charsTillLimit <= 0 },
-          classes[`limiter${capitalize(size)}`]
-        )}
+        className={cx(classes.limiterLabel, {
+          [classes.limiterLabelError]: charsTillLimit <= 0
+        })}
       >
         {multiline ? Math.abs(charsTillLimit) : charsTillLimit} {multilineLabel}
       </span>
@@ -191,10 +187,10 @@ const LimitAdornment = (props: LimitAdornmentProps) => {
 }
 
 const IconAdornment = (props: IconAdornmentProps) => {
-  const { position, disabled, icon, size = 'medium' } = props
+  const { position, disabled, icon, size } = props
   const classes = useStyles()
   const styledIcon = React.cloneElement(icon as ReactElement, {
-    className: cx(classes.icon, classes[`icon${capitalize(size)}`]),
+    className: cx(classes.icon),
     role: 'presentation'
   })
 
@@ -203,6 +199,7 @@ const IconAdornment = (props: IconAdornmentProps) => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       position={position!}
       disabled={disabled}
+      size={size}
       disablePointerEvents
     >
       {styledIcon}
@@ -240,7 +237,14 @@ const EndAdornment = (props: EndAdornmentProps) => {
   } = props
 
   if (icon && iconPosition === 'end') {
-    return <IconAdornment disabled={disabled} position='end' icon={icon} />
+    return (
+      <IconAdornment
+        disabled={disabled}
+        position='end'
+        icon={icon}
+        size={size}
+      />
+    )
   }
 
   if (charsLength && hasCounter({ counter, limit })) {

@@ -25,14 +25,6 @@ export default ({ palette }: Theme) =>
     icon: {
       flex: '1 1 0%' // fix for IE11
     },
-    iconMedium: {
-      width: '1rem',
-      height: '1rem'
-    },
-    iconLarge: {
-      width: '1.5rem',
-      height: '1.5rem'
-    },
     limiterLabel: {
       color: palette.grey.main2,
       lineHeight: '1rem'
@@ -49,11 +41,5 @@ export default ({ palette }: Theme) =>
       margin: 0,
       padding: '0.25rem 0',
       borderTop: `1px solid ${palette.grey.lighter2}`
-    },
-    limiterMedium: {
-      fontSize: '0.625rem'
-    },
-    limiterLarge: {
-      fontSize: '0.75rem'
     }
   })
