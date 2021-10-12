@@ -38,7 +38,7 @@ exports[`Radio Radio.Group renders radio in a grid group 1`] = `
               </span>
             </span>
             <span
-              class="PicassoFormLabel-root PicassoFormLabel-inline PicassoFormControlLabel-label Radio-label"
+              class="PicassoFormLabel-root PicassoFormLabel-inline PicassoFormControlLabel-label Radio-label PicassoFormLabel-textMedium"
             >
               <span
                 class="PicassoFormLabel-text"
@@ -74,7 +74,7 @@ exports[`Radio Radio.Group renders radio in a grid group 1`] = `
               </span>
             </span>
             <span
-              class="PicassoFormLabel-root PicassoFormLabel-inline PicassoFormControlLabel-label Radio-label"
+              class="PicassoFormLabel-root PicassoFormLabel-inline PicassoFormControlLabel-label Radio-label PicassoFormLabel-textMedium"
             >
               <span
                 class="PicassoFormLabel-text"
@@ -110,7 +110,7 @@ exports[`Radio Radio.Group renders radio in a grid group 1`] = `
               </span>
             </span>
             <span
-              class="PicassoFormLabel-root PicassoFormLabel-inline PicassoFormControlLabel-label Radio-label"
+              class="PicassoFormLabel-root PicassoFormLabel-inline PicassoFormControlLabel-label Radio-label PicassoFormLabel-textMedium"
             >
               <span
                 class="PicassoFormLabel-text"
@@ -146,7 +146,7 @@ exports[`Radio Radio.Group renders radio in a grid group 1`] = `
               </span>
             </span>
             <span
-              class="PicassoFormLabel-root PicassoFormLabel-inline PicassoFormControlLabel-label Radio-label"
+              class="PicassoFormLabel-root PicassoFormLabel-inline PicassoFormControlLabel-label Radio-label PicassoFormLabel-textMedium"
             >
               <span
                 class="PicassoFormLabel-text"
@@ -182,7 +182,7 @@ exports[`Radio Radio.Group renders radio in a grid group 1`] = `
               </span>
             </span>
             <span
-              class="PicassoFormLabel-root PicassoFormLabel-inline PicassoFormControlLabel-label Radio-label"
+              class="PicassoFormLabel-root PicassoFormLabel-inline PicassoFormControlLabel-label Radio-label PicassoFormLabel-textMedium"
             >
               <span
                 class="PicassoFormLabel-text"
@@ -218,7 +218,7 @@ exports[`Radio Radio.Group renders radio in a grid group 1`] = `
               </span>
             </span>
             <span
-              class="PicassoFormLabel-root PicassoFormLabel-inline PicassoFormControlLabel-label Radio-label"
+              class="PicassoFormLabel-root PicassoFormLabel-inline PicassoFormControlLabel-label Radio-label PicassoFormLabel-textMedium"
             >
               <span
                 class="PicassoFormLabel-text"
@@ -272,7 +272,7 @@ exports[`Radio Radio.Group renders radio in group 1`] = `
               </span>
             </span>
             <span
-              class="PicassoFormLabel-root PicassoFormLabel-inline PicassoFormControlLabel-label Radio-label"
+              class="PicassoFormLabel-root PicassoFormLabel-inline PicassoFormControlLabel-label Radio-label PicassoFormLabel-textMedium"
             >
               <span
                 class="PicassoFormLabel-text"
@@ -308,7 +308,7 @@ exports[`Radio Radio.Group renders radio in group 1`] = `
               </span>
             </span>
             <span
-              class="PicassoFormLabel-root PicassoFormLabel-inline PicassoFormControlLabel-label Radio-label"
+              class="PicassoFormLabel-root PicassoFormLabel-inline PicassoFormControlLabel-label Radio-label PicassoFormLabel-textMedium"
             >
               <span
                 class="PicassoFormLabel-text"
