@@ -18,6 +18,14 @@ export default ({ palette }: Theme) =>
       fontSize: '0.875em'
     },
 
+    textMedium: {
+      fontSize: '0.875rem'
+    },
+
+    textLarge: {
+      fontSize: '1rem'
+    },
+
     asterisk: {
       marginRight: '0.3125em',
       color: palette.error.main,

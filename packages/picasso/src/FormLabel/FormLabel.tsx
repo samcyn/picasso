@@ -1,7 +1,13 @@
 import React, { forwardRef, HTMLAttributes, ReactNode } from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import cx from 'classnames'
-import { useTitleCase, BaseProps, TextLabelProps } from '@toptal/picasso-shared'
+import {
+  useTitleCase,
+  BaseProps,
+  TextLabelProps,
+  SizeType
+} from '@toptal/picasso-shared'
+import capitalize from '@material-ui/core/utils/capitalize'
 
 import styles from './styles'
 import toTitleCase from '../utils/to-title-case'
@@ -25,6 +31,11 @@ export interface Props
   inline?: boolean
   /** Component used for the root node */
   as?: ComponentType
+  /**
+   * Size of component
+   * @default medium
+   */
+  size?: SizeType<'medium' | 'large'>
 }
 
 const useStyles = makeStyles<Theme>(styles, { name: 'PicassoFormLabel' })
@@ -43,6 +54,7 @@ export const FormLabel = forwardRef<HTMLLabelElement, Props>(function FormLabel(
     as: Component = 'label',
     titleCase: propsTitleCase,
     requiredDecoration,
+    size = 'medium',
     ...rest
   } = props
 
@@ -62,7 +74,8 @@ export const FormLabel = forwardRef<HTMLLabelElement, Props>(function FormLabel(
           [classes.disabled]: disabled,
           [classes.inline]: isInline
         },
-        className
+        className,
+        classes[`text${capitalize(size)}`]
       )}
       style={style}
     >
